@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * This component reades the "playerScore" static variable from the GAME_STATUS static class into this object's number field.
+ * This component reads the "playerScore" static variable from the GAME_STATUS static class
+ * into this object's NumberField component.
  */
 [RequireComponent(typeof(NumberField))]
-public class GameStatusReader : MonoBehaviour {
-    void Update() {
-        GetComponent<NumberField>().SetNumber(GAME_STATUS.playerScore);
+public class GameStatusReader : MonoBehaviour
+{
+    private NumberField numberField;
+
+    private void Awake()
+    {
+        numberField = GetComponent<NumberField>();
+    }
+
+    private void Update()
+    {
+        numberField.SetNumber(GAME_STATUS.playerScore);
     }
 }

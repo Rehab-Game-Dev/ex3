@@ -3,22 +3,35 @@ using UnityEngine;
 
 /**
  * This component should be attached to a TextMeshPro object.
- * It allows to feed an integer number to the text field.
+ * It allows feeding an integer number to the text field.
  */
 [RequireComponent(typeof(TextMeshPro))]
-public class NumberField : MonoBehaviour {
+public class NumberField : MonoBehaviour
+{
     private int number;
+    private TextMeshPro textMeshPro;
 
-    public int GetNumber() {
-        return this.number;
+    private void Awake()
+    {
+        textMeshPro = GetComponent<TextMeshPro>();
     }
 
-    public void SetNumber(int newNumber) {
-        this.number = newNumber;
-        GetComponent<TextMeshPro>().text = newNumber.ToString();
+    public int GetNumber()
+    {
+        return number;
     }
 
-    public void AddNumber(int toAdd) {
-        SetNumber(this.number + toAdd);
+    public void SetNumber(int newNumber)
+    {
+        number = newNumber;
+        if (textMeshPro != null)
+        {
+            textMeshPro.text = number.ToString();
+        }
+    }
+
+    public void AddNumber(int toAdd)
+    {
+        SetNumber(number + toAdd);
     }
 }
